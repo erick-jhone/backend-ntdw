@@ -1,0 +1,19 @@
+{
+  "name": "service-ntdw",
+  "version": "1.0.0",
+  "description": "\"# backend-ntdw\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "awilix": "^12.0.3",
+    "awilix-express": "^9.0.1",
+    "express": "^4.21.1",
+    "mysql2": "^3.11.4",
+    "sequelize": "^6.37.5"
+  }
+}
