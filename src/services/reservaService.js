@@ -1,5 +1,5 @@
 const Reserva = require('../models/reserva');
-const Espaco = require('models/espaco');
+const Espaco = require('../models/espaco');
 const { Op } = require('sequelize');
 
 class ReservaService {

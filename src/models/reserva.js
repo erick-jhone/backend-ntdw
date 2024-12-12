@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
-const Espaco = require('espaco');
+const Espaco = require('../models/espaco');
 
 const Reserva = sequelize.define('Reserva', {
   nomeEvento: {
