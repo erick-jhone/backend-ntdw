@@ -4,17 +4,47 @@ const { Op } = require('sequelize');
 
 class ReservaService {
   async findAll(filters = {}) {
+    // Construir objeto de condições de filtro
+    const whereConditions = {};
+
+    // Filtro por data (período específico)
+    if (filters.dataInicio && filters.dataFim) {
+      whereConditions.dataEvento = {
+        [Op.between]: [filters.dataInicio, filters.dataFim]
+      };
+    }
+
+    // Filtro por tipo de espaço
+    if (filters.tipoEspaco) {
+      whereConditions['$Espaco.tipoEspaco$'] = filters.tipoEspaco;
+    }
+
+    // Filtro por responsável
+    if (filters.responsavelNome) {
+      whereConditions.responsavelNome = {
+        [Op.like]: `%${filters.responsavelNome}%`
+      };
+    }
+
+    // Filtro por situação da reserva
+    if (filters.situacaoReserva) {
+      whereConditions.situacaoReserva = filters.situacaoReserva;
+    }
+
+    // Buscar reservas com filtros e incluir informações do espaço
     return Reserva.findAll({
-      where: {
-        ...(filters.dataInicio && filters.dataFim && { 
-          dataEvento: { 
-            [Op.between]: [filters.dataInicio, filters.dataFim] 
-          } 
-        }),
-        ...(filters.responsavelNome && { responsavelNome: filters.responsavelNome }),
-        ...(filters.situacaoReserva && { situacaoReserva: filters.situacaoReserva })
-      },
-      include: [Espaco]
+      where: whereConditions,
+      include: [
+        {
+          model: Espaco,
+          attributes: ['id', 'nome', 'tipoEspaco']
+        }
+      ],
+      // Opções de ordenação
+      order: [
+        ['dataEvento', 'ASC'],
+        ['horarioInicio', 'ASC']
+      ]
     });
   }
 
