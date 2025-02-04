@@ -76,7 +76,6 @@ class ReservaService {
       throw new Error('Já existe uma reserva para este espaço no mesmo período');
     }
 
-    // Verificar se o espaço está ativo
     const espaco = await Espaco.findByPk(data.espacoId);
     if (!espaco || espaco.situacao !== 'ativo') {
       throw new Error('Espaço indisponível para reserva');

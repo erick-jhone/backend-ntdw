@@ -6,17 +6,15 @@ const sequelize = new Sequelize('modulo_logistica', 'root', 'root', {
   port: '3306',
   dialect: 'mysql',
   define: {
-    // Opções padrão para todos os modelos
     timestamps: true,
     underscored: true
   },
   sync: {
-    alter: true, // Ativa alter para todas as entidades
-    force: false // Mantém dados existentes
+    alter: true, 
+    force: false 
   }
 });
 
-// Função para sincronizar todos os modelos
 async function syncAllModels() {
   try {
     await sequelize.sync({ alter: true });
@@ -26,7 +24,6 @@ async function syncAllModels() {
   }
 }
 
-// Chame a função de sincronização
 syncAllModels();
 
 module.exports = sequelize;

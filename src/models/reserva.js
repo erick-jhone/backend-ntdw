@@ -2,6 +2,8 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 const Espaco = require('../models/espaco');
 
+// TO DO : IMPLEMENTAR CAMPOS OBRIGATÓRIOS
+
 const Reserva = sequelize.define('Reserva', {
   nomeEvento: {
     type: DataTypes.STRING,

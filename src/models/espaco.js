@@ -24,7 +24,7 @@ const Espaco = sequelize.define('Espaco', {
     type: DataTypes.TEXT
   },
   situacao: {
-    type: DataTypes.ENUM('ativo', 'inativo'),
+    type: DataTypes.ENUM('ativo', 'inativo'), // TODO: Incluir 'manutenção' futuramente.
     defaultValue: 'ativo'
   },
   localizacao: {
