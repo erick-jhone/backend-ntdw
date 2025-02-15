@@ -11,15 +11,29 @@ class EspacoService {
     });
   }
 
+  async findById(id) { // Novo método para buscar um espaço por ID
+    return Espaco.findByPk(id);
+  }
+
+  async updateEspaco(id, updatedData) {
+    const espaco = await Espaco.findByPk(id); // Busca o espaço pelo ID
+    if (!espaco) {
+      throw new Error('Espaço não encontrado');
+    }
+
+    // Atualiza os dados do espaço com os novos valores
+    return espaco.update(updatedData);
+  }
+
   async create(data) {
     // Verificar duplicidade de nome
-    const existingEspaco = await Espaco.findOne({ 
-      where: { 
+    const existingEspaco = await Espaco.findOne({
+      where: {
         nome: data.nome,
         situacao: { [Op.or]: ['ativo', 'inativo'] }
-      } 
+      }
     });
-    
+
     if (existingEspaco) {
       throw new Error('Já existe um espaço com este nome');
     }
@@ -32,7 +46,7 @@ class EspacoService {
     if (!espaco) {
       throw new Error('Espaço não encontrado');
     }
-    
+
     espaco.situacao = 'inativo';
     return espaco.save();
   }
@@ -42,10 +56,12 @@ class EspacoService {
     if (!espaco) {
       throw new Error('Espaço não encontrado');
     }
-    
+
     espaco.situacao = 'ativo';
     return espaco.save();
   }
+
+  
 }
 
 module.exports = EspacoService;

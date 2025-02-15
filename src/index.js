@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors'); 
 const app = require('./config/container'); 
-const userRoutes = require('./routes/userRoutes');
 const espacoRoutes = require('./routes/espacoRoutes');
 const reservaRoutes = require('./routes/reservaRoutes');
 
@@ -11,7 +10,6 @@ app.use(cors({
 }));
 
 app.use(express.json()); 
-app.use('/user', userRoutes); 
 app.use('/espaco', espacoRoutes);
 app.use('/reserva', reservaRoutes);
 
