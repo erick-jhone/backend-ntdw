@@ -13,7 +13,7 @@ const sequelize = new Sequelize('modulo_logistica', 'root', 'root', {
     alter: true, 
     force: false 
   }
-});
+});''
 
 async function syncAllModels() {
   try {
